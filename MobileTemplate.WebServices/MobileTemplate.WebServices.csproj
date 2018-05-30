@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="modernhttpclient" Version="2.4.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobileTemplate.Common\MobileTemplate.Common.csproj" />
+    <ProjectReference Include="..\MobileTemplate.DataContracts\MobileTemplate.DataContracts.csproj" />
+  </ItemGroup>
+
+</Project>
