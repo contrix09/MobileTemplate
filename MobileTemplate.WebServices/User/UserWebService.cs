@@ -1,5 +1,4 @@
-﻿using MobileTemplate.Common;
-using MobileTemplate.DataContracts.User;
+﻿using MobileTemplate.DataContracts.User;
 using MobileTemplate.WebServices.Base;
 using Newtonsoft.Json;
 using System.Net.Http;

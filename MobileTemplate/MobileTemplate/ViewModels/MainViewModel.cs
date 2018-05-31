@@ -3,7 +3,6 @@ using MobileTemplate.Managers.User;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace MobileTemplate.ViewModels
 {

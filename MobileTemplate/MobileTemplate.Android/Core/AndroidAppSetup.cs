@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using MobileTemplate.Core;
-using Xamarin.Forms.Platform.Android;
 
 namespace MobileTemplate.Droid.Core
 {

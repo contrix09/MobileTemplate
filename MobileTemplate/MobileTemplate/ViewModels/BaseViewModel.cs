@@ -1,5 +1,5 @@
 ﻿using CommonServiceLocator;
-using MobileTemplate.Services;
+using MobileTemplate.Utilities;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -50,12 +50,11 @@ namespace MobileTemplate.ViewModels
         }
 
         /// <summary>
-        /// Overridable method for any view model initialization.
+        /// Overridable method for view model initialization.
         /// </summary>
         /// <param name="parameter">The parameter passed for initialization.</param>
         public virtual Task Init(object parameter)
         {
-            System.Diagnostics.Debug.WriteLine("Init");
             return Task.FromResult(default(object));
         }
 

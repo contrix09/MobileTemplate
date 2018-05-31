@@ -1,23 +1,16 @@
-﻿using MobileTemplate.ViewModels;
-using MobileTemplate.Views;
-using System;
+﻿using CommonServiceLocator;
+using MobileTemplate.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MobileTemplate.Services
+namespace MobileTemplate.Utilities
 {
     public class NavigationService : INavigationService
     {
         #region Fields
 
         private static readonly Stack<NavigationPage> _navigationPageStack = new Stack<NavigationPage>();
-
-        private readonly object _sync = new object();
-
-        private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
 
         #endregion Fields
 
@@ -26,60 +19,13 @@ namespace MobileTemplate.Services
         /// <summary>
         /// Gets the current visible Page key
         /// </summary>
-        public string CurrentPageKey
-        {
-            get
-            {
-                lock (this._sync)
-                {
-                    if (this.CurrentNavigationPage?.CurrentPage == null)
-                    {
-                        return null;
-                    }
-
-                    var pageType = this.CurrentNavigationPage.CurrentPage.GetType();
-
-                    return this._pagesByKey.ContainsValue(pageType)
-                        ? this._pagesByKey.First(p => p.Value == pageType).Key
-                        : null;
-                }
-            }
-        }
+        public string CurrentPageKey { get; set; }
 
         private NavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
 
         #endregion Properties
 
-        #region Constructor
-
-        public NavigationService()
-        {
-            this.Configure("MainView", typeof(MainView));
-        }
-
-        #endregion Constructor
-
         #region Methods
-
-        /// <summary>
-        /// Adds a Page in the Navigation Stack
-        /// </summary>
-        /// <param name="pageKey">The key to identify a specific Page</param>
-        /// <param name="pageType">The type of the Page</param>
-        public void Configure(string pageKey, Type pageType)
-        {
-            lock (this._sync)
-            {
-                if (this._pagesByKey.ContainsKey(pageKey))
-                {
-                    this._pagesByKey[pageKey] = pageType;
-                }
-                else
-                {
-                    this._pagesByKey.Add(pageKey, pageType);
-                }
-            }
-        }
 
         /// <summary>
         /// Sets the Root Page of a new Navigation Stack
@@ -87,7 +33,7 @@ namespace MobileTemplate.Services
         /// <param name="rootPageKey">The key to identify the Root Page</param>
         public void SetRootPage(string rootPageKey, object parameter = null)
         {
-            var rootPage = GetPage(rootPageKey) ?? throw new NullReferenceException($"The root page {rootPageKey} was null");
+            var rootPage = GetPage(rootPageKey);
             var mainPage = new NavigationPage(rootPage);
             _navigationPageStack.Clear();
             _navigationPageStack.Push(mainPage);
@@ -96,6 +42,8 @@ namespace MobileTemplate.Services
             {
                 (rootPage.BindingContext as BaseViewModel).InitParameter = parameter;
             }
+
+            this.CurrentPageKey = rootPageKey;
 
             Application.Current.MainPage = mainPage;
         }
@@ -151,6 +99,8 @@ namespace MobileTemplate.Services
             }
 
             await this.CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
+
+            this.CurrentPageKey = pageKey;
         }
 
         /// <summary>
@@ -179,6 +129,8 @@ namespace MobileTemplate.Services
             }
 
             await this.CurrentNavigationPage.Navigation.PushAsync(page, animated);
+
+            this.CurrentPageKey = pageKey;
         }
 
         /// <summary>
@@ -188,18 +140,7 @@ namespace MobileTemplate.Services
         /// <param name="parameter">The parameter to be passed to the Page that will be retrieved</param>
         private Page GetPage(string pageKey)
         {
-            lock (this._sync)
-            {
-                if (!this._pagesByKey.ContainsKey(pageKey))
-                {
-                    throw new ArgumentException($"No such page: {pageKey}. Did you forget to call NavigationService.Configure?");
-                }
-
-                var type = this._pagesByKey[pageKey];
-                var constructor = type.GetTypeInfo().DeclaredConstructors.FirstOrDefault();
-
-                return constructor?.Invoke(null) as Page ?? throw new InvalidOperationException("No suitable constructor found for page " + pageKey);
-            }
+            return ServiceLocator.Current.GetInstance<Page>(pageKey);
         }
 
         #endregion Methods

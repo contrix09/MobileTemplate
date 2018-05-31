@@ -1,18 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using System.Threading.Tasks;
 
-namespace MobileTemplate.Services
+namespace MobileTemplate.Utilities
 {
     public interface INavigationService
     {
-        /// <summary>
-        /// Adds a Page in the Navigation Stack
-        /// </summary>
-        /// <param name="pageKey">The key to identify a specific Page</param>
-        /// <param name="pageType">The type of the Page</param>
-        void Configure(string pageKey, Type pageType);
-
         /// <summary>
         /// Sets the Root Page of a new Navigation Stack
         /// </summary>

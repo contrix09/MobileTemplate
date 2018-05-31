@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MobileTemplate.DataContracts.User;
 using MobileTemplate.Entities.User;
 using MobileTemplate.WebServices.User;

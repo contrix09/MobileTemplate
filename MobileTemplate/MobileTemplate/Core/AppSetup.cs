@@ -1,10 +1,13 @@
 ﻿using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
+using MobileTemplate.Common;
 using MobileTemplate.Managers.User;
-using MobileTemplate.Services;
+using MobileTemplate.Utilities;
 using MobileTemplate.ViewModels;
+using MobileTemplate.Views;
 using MobileTemplate.WebServices.User;
+using Xamarin.Forms;
 
 namespace MobileTemplate.Core
 {
@@ -25,10 +28,16 @@ namespace MobileTemplate.Core
 
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
+            this.RegisterViews(builder);
             this.RegisterViewModels(builder);
             this.RegisterWebServices(builder);
             this.RegisterManagers(builder);
             this.RegisterUtilities(builder);
+        }
+
+        private void RegisterViews(ContainerBuilder builder)
+        {
+            builder.RegisterType<MainView>().Named<Page>(ViewNames.MAIN_VIEW).InstancePerDependency();
         }
 
         private void RegisterViewModels(ContainerBuilder builder)

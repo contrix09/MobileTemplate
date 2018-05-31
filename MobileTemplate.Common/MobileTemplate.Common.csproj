@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MobileTemplate.DataContracts\MobileTemplate.DataContracts.csproj" />
+    <ProjectReference Include="..\MobileTemplate.Entities\MobileTemplate.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

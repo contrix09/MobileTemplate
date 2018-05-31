@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MobileTemplate.Common
+﻿namespace MobileTemplate.Common
 {
     public static class WebServiceEndpoints
     {

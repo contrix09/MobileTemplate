@@ -1,6 +1,7 @@
 using CommonServiceLocator;
+using MobileTemplate.Common;
 using MobileTemplate.Core;
-using MobileTemplate.Services;
+using MobileTemplate.Utilities;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +22,7 @@ namespace MobileTemplate
 		{
             var navigation = ServiceLocator.Current.GetInstance<INavigationService>();
 
-            navigation.SetRootPage("MainView", "Welcome to Xamarin.Forms!");
+            navigation.SetRootPage(ViewNames.MAIN_VIEW, "Welcome to Xamarin.Forms!");
         }
 
 		protected override void OnSleep ()

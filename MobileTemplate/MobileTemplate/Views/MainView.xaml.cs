@@ -2,7 +2,7 @@
 
 namespace MobileTemplate.Views
 {
-    public partial class MainView : BaseView<MainViewModel>
+    public partial class MainView : MainViewBase
 	{
 		public MainView()
 		{
@@ -13,4 +13,6 @@ namespace MobileTemplate.Views
             this.BindingContext = this.ViewModel; 
         }
 	}
+
+    public class MainViewBase : BaseView<MainViewModel> { }
 }
