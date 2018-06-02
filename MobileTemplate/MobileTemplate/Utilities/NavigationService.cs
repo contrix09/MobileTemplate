@@ -1,5 +1,7 @@
-﻿using CommonServiceLocator;
-using MobileTemplate.ViewModels;
+﻿using Autofac;
+using CommonServiceLocator;
+using MobileTemplate.Controls;
+using MobileTemplate.Core;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -10,7 +12,7 @@ namespace MobileTemplate.Utilities
     {
         #region Fields
 
-        private static readonly Stack<NavigationPage> _navigationPageStack = new Stack<NavigationPage>();
+        private static readonly Stack<CustomNavigationPage> _navigationPageStack = new Stack<CustomNavigationPage>();
 
         #endregion Fields
 
@@ -21,7 +23,7 @@ namespace MobileTemplate.Utilities
         /// </summary>
         public string CurrentPageKey { get; set; }
 
-        private NavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
+        private CustomNavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
 
         #endregion Properties
 
@@ -30,18 +32,19 @@ namespace MobileTemplate.Utilities
         /// <summary>
         /// Sets the Root Page of a new Navigation Stack
         /// </summary>
-        /// <param name="rootPageKey">The key to identify the Root Page</param>
+        /// <param name="rootPageKey">The key to identify the root page. See also <see cref="ViewNames"/>.</param>
         public void SetRootPage(string rootPageKey, object parameter = null)
         {
-            var rootPage = GetPage(rootPageKey);
-            var mainPage = new NavigationPage(rootPage);
+            var rootPage = GetPage(rootPageKey, parameter);
+            var mainPage = new CustomNavigationPage(rootPage);
+
+            if (_navigationPageStack.Count > 0)
+            {
+                CurrentNavigationPage.CleanUp();
+            }
+
             _navigationPageStack.Clear();
             _navigationPageStack.Push(mainPage);
-
-            if (parameter != null)
-            {
-                (rootPage.BindingContext as BaseViewModel).InitParameter = parameter;
-            }
 
             this.CurrentPageKey = rootPageKey;
 
@@ -88,15 +91,10 @@ namespace MobileTemplate.Utilities
         /// <param name="animated">Sets whether the navigation will be animated</param>
         public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
         {
-            var page = GetPage(pageKey);
-            var modalNavigationPage = new NavigationPage(page);
+            var page = GetPage(pageKey, parameter);
+            var modalNavigationPage = new CustomNavigationPage(page);
             NavigationPage.SetHasNavigationBar(page, false);
             _navigationPageStack.Push(modalNavigationPage);
-
-            if (parameter != null)
-            {
-                (page.BindingContext as BaseViewModel).InitParameter = parameter;
-            }
 
             await this.CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
 
@@ -121,12 +119,7 @@ namespace MobileTemplate.Utilities
         /// <param name="animated">Sets whether the navigation will be animated</param>
         public async Task NavigateAsync(string pageKey, object parameter, bool animated = true)
         {
-            var page = GetPage(pageKey);
-
-            if (parameter != null)
-            {
-                (page.BindingContext as BaseViewModel).InitParameter = parameter;
-            }
+            var page = GetPage(pageKey, parameter);
 
             await this.CurrentNavigationPage.Navigation.PushAsync(page, animated);
 
@@ -138,9 +131,17 @@ namespace MobileTemplate.Utilities
         /// </summary>
         /// <param name="pageKey">The key to identify the page to be retrieved</param>
         /// <param name="parameter">The parameter to be passed to the Page that will be retrieved</param>
-        private Page GetPage(string pageKey)
+        private Page GetPage(string pageKey, object parameter = null)
         {
-            return ServiceLocator.Current.GetInstance<Page>(pageKey);
+            if(parameter == null)
+            {
+                return ServiceLocator.Current.GetInstance<Page>(pageKey);
+            }
+
+            using (var scope = AppContainer.Container.BeginLifetimeScope())
+            {
+                return scope.ResolveNamed<Page>(pageKey, new NamedParameter("parameter", parameter));
+            }
         }
 
         #endregion Methods

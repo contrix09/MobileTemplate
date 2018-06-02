@@ -1,23 +1,18 @@
 ﻿using CommonServiceLocator;
+using MobileTemplate.Helpers;
 using MobileTemplate.Utilities;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace MobileTemplate.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged, ICleanUp
     {
         /// <summary>
-        /// Raised when there is any changes in this viewmodel's properties using the Set() method.
+        /// Raised when there is any changes in this viewmodel's properties using the <see cref="BaseViewModel.Set{T}(ref T, T, string)"/> method.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// The object containing the needed parameter during the viewmodel's initialization.
-        /// </summary>
-        public object InitParameter { get; set; }
 
         /// <summary>
         /// The Navigation Service.
@@ -25,7 +20,7 @@ namespace MobileTemplate.ViewModels
         protected INavigationService Navigation => ServiceLocator.Current.GetInstance<INavigationService>();
 
         /// <summary>
-        /// Called to change any property's value.
+        /// Method to change any property's value. This will also call the <see cref="BaseViewModel.OnPropertyChanged(string)" /> method.
         /// </summary>
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="field">The field containing the current property's value.</param>
@@ -50,21 +45,26 @@ namespace MobileTemplate.ViewModels
         }
 
         /// <summary>
-        /// Overridable method for view model initialization.
+        /// Method for view model initialization. This will be called if the last <see cref="NavigationService.NavigateAsync(string, object, bool)"/> or <see cref="NavigationService.NavigateModalAsync(string, object, bool)"/> action contains a parameter.
         /// </summary>
         /// <param name="parameter">The parameter passed for initialization.</param>
-        public virtual Task Init(object parameter)
-        {
-            return Task.FromResult(default(object));
-        }
+        public virtual void Init(object parameter) { }
 
         /// <summary>
-        /// Method called for any change in a property's value.
+        /// Method called to raise the <see cref="INotifyPropertyChanged.PropertyChanged" /> event if there was a change in any property.
         /// </summary>
         /// <param name="propertyName">The name of the property who's value has changed</param>
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Method to clean up objects in this view model.
+        /// </summary>
+        public virtual void CleanUp()
+        {
+            System.Diagnostics.Debug.WriteLine("Cleaning up view model");
         }
     }
 }

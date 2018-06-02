@@ -1,19 +1,29 @@
-﻿using MobileTemplate.Helpers;
+﻿using MobileTemplate.Common;
+using MobileTemplate.Helpers.Commands;
 using MobileTemplate.Managers.User;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MobileTemplate.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        #region Fields
+
         private readonly IUserManager _userManager;
+
+        #endregion
+
+        #region Constructor
 
         public MainViewModel(IUserManager userManager)
         {
             this._userManager = userManager ?? throw new ArgumentNullException();
         }
+
+        #endregion
+
+        #region Properties
 
         private string _welcomeText;
         public string WelcomeText
@@ -22,34 +32,33 @@ namespace MobileTemplate.ViewModels
             set => Set(ref this._welcomeText, value);
         }
 
-        private bool _isBusy;
-        public bool IsBusy
+        #endregion Properties
+
+        #region Commands
+
+        public AsyncCommand LabelTapCommand => new AsyncCommand(this.LoginAsync);
+
+        #endregion
+
+        #region Methods
+
+        public override void Init(object parameter)
         {
-            get => this._isBusy;
-            set => Set(ref this._isBusy, value);
+            this.WelcomeText = parameter.ToString();
         }
 
-        public ICommand LabelTapCommand => new AsyncCommand(this.LoginAsync, () => !this.IsBusy);
-
-        public override Task Init(object parameter)
+        private async Task LoginAsync(object arg)
         {
-            this.WelcomeText = this.InitParameter.ToString();
+            //System.Diagnostics.Debug.WriteLine(arg.ToString());
 
-            return base.Init(parameter);
+            //await this._userManager.LoginUser(null);
+            //await Task.Delay(5000);
+
+            //System.Diagnostics.Debug.WriteLine("Task finished");
+
+            await this.Navigation.NavigateAsync(ViewNames.MAIN_VIEW, "Second Page");
         }
 
-        private async Task LoginAsync()
-        {
-            System.Diagnostics.Debug.WriteLine("Task started");
-
-            this.IsBusy = true;
-
-            await this._userManager.LoginUser(null);
-            await Task.Delay(5000);
-
-            System.Diagnostics.Debug.WriteLine("Task finished");
-
-            this.IsBusy = false;
-        }
+        #endregion
     }
 }

@@ -9,6 +9,8 @@ namespace MobileTemplate.Droid
     [Activity(Label = "MobileTemplate", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private App _app;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -17,7 +19,14 @@ namespace MobileTemplate.Droid
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App(new AndroidAppSetup()));
+            this._app = new App(new AndroidAppSetup());
+            LoadApplication(this._app);
+        }
+
+        protected override void OnDestroy()
+        {
+            this._app.OnStop();
+            base.OnDestroy();
         }
     }
 }

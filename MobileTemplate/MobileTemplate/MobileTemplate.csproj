@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Helpers\AsyncCommand.cs" />
+    <Compile Remove="Helpers\AsynCommandExtensions.cs" />
+    <Compile Remove="Helpers\IAsyncCommand.cs" />
+    <Compile Remove="Helpers\IErrorHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="5.0.0" />
+    <PackageReference Include="Nito.Mvvm.Core" Version="1.2.2" />
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
   </ItemGroup>
 

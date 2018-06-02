@@ -18,7 +18,7 @@ namespace MobileTemplate
             AppContainer.Container.BeginLifetimeScope();
 		}
 
-		protected override void OnStart ()
+        protected override void OnStart ()
 		{
             var navigation = ServiceLocator.Current.GetInstance<INavigationService>();
 
@@ -34,5 +34,10 @@ namespace MobileTemplate
 		{
 			// Handle when your app resumes
 		}
+
+        public void OnStop()
+        {
+            // Handle when your app is terminated/destroyed
+        }
 	}
 }
