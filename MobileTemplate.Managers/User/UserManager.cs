@@ -22,8 +22,7 @@ namespace MobileTemplate.Managers.User
                 Password = user?.Password
             };
 
-            //await this._userWebService.LoginUser(userContract);
-            await Task.Delay(2000);
+            await this._userWebService.LoginUser(userContract);
 
             return "Task Finished";
         }

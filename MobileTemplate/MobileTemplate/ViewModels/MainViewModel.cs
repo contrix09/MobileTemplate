@@ -42,21 +42,14 @@ namespace MobileTemplate.ViewModels
 
         #region Methods
 
-        public override void Init(object parameter)
+        public override void Init(object parameter = null)
         {
-            this.WelcomeText = parameter.ToString();
+            this.WelcomeText = parameter?.ToString();
         }
 
         private async Task LoginAsync(object arg)
         {
-            //System.Diagnostics.Debug.WriteLine(arg.ToString());
-
-            //await this._userManager.LoginUser(null);
-            //await Task.Delay(5000);
-
-            //System.Diagnostics.Debug.WriteLine("Task finished");
-
-            await this.Navigation.NavigateAsync(ViewNames.MAIN_VIEW, "Second Page");
+            await this.Navigation.NavigateAsync(ViewNames.MAIN_VIEW);
         }
 
         #endregion

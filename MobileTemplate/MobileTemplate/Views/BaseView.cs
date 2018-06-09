@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using MobileTemplate.Helpers;
+using MobileTemplate.Utilities;
 using MobileTemplate.ViewModels;
 using Xamarin.Forms;
 
@@ -7,19 +8,11 @@ namespace MobileTemplate.Views
 {
     public class BaseView<TViewModel> : ContentPage, ICleanUp where TViewModel : BaseViewModel
     {
-        private object _parameter;
-
         private bool _viewModelInitialized;
 
         public BaseView()
         {
             this.ViewModel = ServiceLocator.Current.GetInstance<TViewModel>();
-        }
-
-        public BaseView(object parameter)
-        {
-            this.ViewModel = ServiceLocator.Current.GetInstance<TViewModel>();
-            this._parameter = parameter;
         }
 
         /// <summary>
@@ -33,7 +26,6 @@ namespace MobileTemplate.Views
         /// </summary>
         public virtual void CleanUp()
         {
-            System.Diagnostics.Debug.WriteLine("Cleaning up view");
             this.ViewModel.CleanUp();
             this.BindingContext = this.ViewModel = null;
             this.Content = null;
@@ -41,8 +33,6 @@ namespace MobileTemplate.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             if(!this._viewModelInitialized)
             {
                 if(this.BindingContext == null)
@@ -50,13 +40,10 @@ namespace MobileTemplate.Views
                     this.BindingContext = this.ViewModel;
                 }
 
-                if(this._parameter != null)
-                {
-                    this.ViewModel.Init(this._parameter);
-                }
-
                 this._viewModelInitialized = true;
             }
+
+            base.OnAppearing();
         }
     }
 }

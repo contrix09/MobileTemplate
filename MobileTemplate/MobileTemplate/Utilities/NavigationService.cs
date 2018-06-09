@@ -1,7 +1,7 @@
-﻿using Autofac;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using MobileTemplate.Controls;
-using MobileTemplate.Core;
+using MobileTemplate.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,6 +13,7 @@ namespace MobileTemplate.Utilities
         #region Fields
 
         private static readonly Stack<CustomNavigationPage> _navigationPageStack = new Stack<CustomNavigationPage>();
+        private EventHandler _onAppearing;
 
         #endregion Fields
 
@@ -33,6 +34,7 @@ namespace MobileTemplate.Utilities
         /// Sets the Root Page of a new Navigation Stack
         /// </summary>
         /// <param name="rootPageKey">The key to identify the root page. See also <see cref="ViewNames"/>.</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the root page.</param>
         public void SetRootPage(string rootPageKey, object parameter = null)
         {
             var rootPage = GetPage(rootPageKey, parameter);
@@ -40,7 +42,7 @@ namespace MobileTemplate.Utilities
 
             if (_navigationPageStack.Count > 0)
             {
-                CurrentNavigationPage.CleanUp();
+                CurrentNavigationPage?.CleanUp();
             }
 
             _navigationPageStack.Clear();
@@ -87,13 +89,15 @@ namespace MobileTemplate.Utilities
         /// Navigate to a Page displayed modally
         /// </summary>
         /// <param name="pageKey">The key to identify the Page to navigate to</param>
-        /// <param name="parameter">The parameter to be passed to the Page that will be navigated to</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be navigated to</param>
         /// <param name="animated">Sets whether the navigation will be animated</param>
         public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
             var modalNavigationPage = new CustomNavigationPage(page);
+
             NavigationPage.SetHasNavigationBar(page, false);
+
             _navigationPageStack.Push(modalNavigationPage);
 
             await this.CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
@@ -115,7 +119,7 @@ namespace MobileTemplate.Utilities
         /// Navigate to a Page
         /// </summary>
         /// <param name="pageKey">The key to identify the Page to navigate to</param>
-        /// <param name="parameter">The parameter to be passed to the Page that will be navigated to</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be navigated to</param>
         /// <param name="animated">Sets whether the navigation will be animated</param>
         public async Task NavigateAsync(string pageKey, object parameter, bool animated = true)
         {
@@ -130,18 +134,24 @@ namespace MobileTemplate.Utilities
         /// Initializes and retrieves a Page
         /// </summary>
         /// <param name="pageKey">The key to identify the page to be retrieved</param>
-        /// <param name="parameter">The parameter to be passed to the Page that will be retrieved</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be retrieved</param>
         private Page GetPage(string pageKey, object parameter = null)
         {
-            if(parameter == null)
-            {
-                return ServiceLocator.Current.GetInstance<Page>(pageKey);
-            }
+            var page = ServiceLocator.Current.GetInstance<Page>(pageKey);
 
-            using (var scope = AppContainer.Container.BeginLifetimeScope())
+            this._onAppearing = (s, e) =>
             {
-                return scope.ResolveNamed<Page>(pageKey, new NamedParameter("parameter", parameter));
-            }
+                if (page.BindingContext is BaseViewModel viewModel)
+                {
+                    viewModel.Init(parameter);
+                }
+
+                page.Appearing -= this._onAppearing;
+            };
+
+            page.Appearing += this._onAppearing;
+
+            return page;
         }
 
         #endregion Methods

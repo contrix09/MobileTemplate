@@ -1,4 +1,5 @@
-﻿using MobileTemplate.DataContracts.User;
+﻿using MobileTemplate.Common;
+using MobileTemplate.DataContracts.User;
 using MobileTemplate.WebServices.Base;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -14,8 +15,7 @@ namespace MobileTemplate.WebServices.User
             string json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            //await this.PostAsync(WebServiceEndpoints.LOGIN, content);
-            await Task.Delay(5000);
+            await this.PostAsync(WebServiceEndpoints.LOGIN, content).ConfigureAwait(false);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace MobileTemplate.Core
 
         private void RegisterViews(ContainerBuilder builder)
         {
-            builder.Register((c, p) => new MainView(p.Named<object>("parameter"))).Named<Page>(ViewNames.MAIN_VIEW).InstancePerDependency();
+            builder.RegisterType<MainView>().Named<Page>(ViewNames.MAIN_VIEW).InstancePerDependency();
         }
 
         private void RegisterViewModels(ContainerBuilder builder)

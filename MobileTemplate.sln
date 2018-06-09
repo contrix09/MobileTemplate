@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileTemplate.WebServices"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileTemplate.DataContracts", "MobileTemplate.DataContracts\MobileTemplate.DataContracts.csproj", "{D108383F-41EB-43C0-8818-07FD6241E6F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileTemplate.Common", "MobileTemplate.Common\MobileTemplate.Common.csproj", "{994CB893-584D-4EC0-8FAC-0FB1299D121D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileTemplate.Common", "MobileTemplate.Common\MobileTemplate.Common.csproj", "{994CB893-584D-4EC0-8FAC-0FB1299D121D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

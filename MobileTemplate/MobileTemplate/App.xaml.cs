@@ -1,6 +1,7 @@
 using CommonServiceLocator;
 using MobileTemplate.Common;
 using MobileTemplate.Core;
+using MobileTemplate.Resources;
 using MobileTemplate.Utilities;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

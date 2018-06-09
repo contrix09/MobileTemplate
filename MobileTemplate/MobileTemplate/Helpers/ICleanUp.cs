@@ -6,7 +6,7 @@
     public interface ICleanUp
     {
         /// <summary>
-        /// Provides a method for disposing objects.
+        /// Provides a method for cleaning up objects.
         /// </summary>
         void CleanUp();
     }

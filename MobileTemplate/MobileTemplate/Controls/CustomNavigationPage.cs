@@ -14,12 +14,15 @@ namespace MobileTemplate.Controls
         }
 
         /// <summary>
-        /// Method to dispose this <see cref="NavigationPage"/> and its <see cref="NavigationPage.RootPage"/>.
+        /// Method to clean this <see cref="NavigationPage"/> and its <see cref="NavigationPage.RootPage"/>.
         /// </summary>
         public void CleanUp()
         {
-            var currentNavigationRootPage = this.Navigation.NavigationStack.FirstOrDefault() as ICleanUp;
-            currentNavigationRootPage.CleanUp();
+            if (this.RootPage is ICleanUp currentNavigationRootPage)
+            {
+                currentNavigationRootPage.CleanUp();
+            }
+
             this.Popped -= this.CustomNavigationPage_Popped;
         }
 

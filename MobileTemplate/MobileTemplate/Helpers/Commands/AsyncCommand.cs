@@ -3,9 +3,6 @@ using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-/// <summary>
-/// d
-/// </summary>
 namespace MobileTemplate.Helpers.Commands
 {
     /// <summary>

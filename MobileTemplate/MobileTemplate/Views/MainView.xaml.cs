@@ -1,12 +1,21 @@
 ﻿using MobileTemplate.ViewModels;
+using Xamarin.Forms;
 
 namespace MobileTemplate.Views
 {
-    public partial class MainView : BaseView<MainViewModel>
+    public partial class MainView : BaseMainView
     {
-		public MainView(object parameter) : base(parameter)
+		public MainView()
 		{
             InitializeComponent();
         }
+
+        public override void CleanUp()
+        {
+            base.CleanUp();
+            this.WelcomeLabel.GestureRecognizers.Clear();
+        }
     }
+
+    public class BaseMainView : BaseView<MainViewModel> { }
 }
