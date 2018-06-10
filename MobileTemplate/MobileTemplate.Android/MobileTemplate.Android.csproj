@@ -56,6 +56,9 @@
     <PackageReference Include="Autofac">
       <Version>4.8.1</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.4.118</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
@@ -65,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AndroidAppSetup.cs" />
+    <Compile Include="Database\AndroidDatabaseConnection.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +106,10 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MobileTemplate.Repositories\MobileTemplate.Repositories.csproj">
+      <Project>{1000E82B-CFBB-4E38-B197-425F3CCAF306}</Project>
+      <Name>MobileTemplate.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MobileTemplate\MobileTemplate.csproj">
       <Project>{1E807C86-97E1-4EAE-A57A-4563F3F2D643}</Project>
       <Name>MobileTemplate</Name>

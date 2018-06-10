@@ -1,15 +1,21 @@
 ﻿using CommonServiceLocator;
+using MobileTemplate.Common.Runtime;
 using MobileTemplate.Helpers;
 using MobileTemplate.Utilities;
 
 namespace MobileTemplate.ViewModels
 {
-    public abstract class BaseViewModel : PropertyChangeAware, ICleanUp
+    public class BaseViewModel : PropertyChangeAware, ICleanUp
     {
         /// <summary>
         /// The Navigation Service.
         /// </summary>
-        protected INavigationService Navigation => ServiceLocator.Current.GetInstance<INavigationService>();
+        protected INavigationService Navigation { get; }
+
+        public BaseViewModel()
+        {
+            this.Navigation = ServiceLocator.Current.GetInstance<INavigationService>();
+        }
 
         /// <summary>
         /// Method for view model initialization.

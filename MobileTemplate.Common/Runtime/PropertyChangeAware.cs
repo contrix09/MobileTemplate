@@ -2,10 +2,11 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MobileTemplate.Helpers
+namespace MobileTemplate.Common.Runtime
 {
     /// <summary>
-    /// An abstract class that implements the <see cref="INotifyPropertyChanged"/> interface. Inherit this to any class you want to see changes in its properties.
+    /// An abstract class that implements the <see cref="INotifyPropertyChanged"/> interface. It provides the method <see cref="PropertyChangeAware.Set{T}(ref T, T, string)"/> 
+    /// which will raise the <see cref="INotifyPropertyChanged.PropertyChanged"/> event when there is any change of an inheriting class' properties.
     ///</summary>
     public abstract class PropertyChangeAware : INotifyPropertyChanged
     {
@@ -42,7 +43,7 @@ namespace MobileTemplate.Helpers
         /// <summary>
         /// Method called to raise the <see cref="INotifyPropertyChanged.PropertyChanged" /> event if there was a change in any property.
         /// </summary>
-        /// <param name="propertyName">The name of the property who's value has changed</param>
+        /// <param name="propertyName">The name of the property who's value has changed.</param>
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

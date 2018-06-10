@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace MobileTemplate.WebServices.Base
+namespace MobileTemplate.WebServices
 {
     /// <summary>
     /// The base class that is inherited by the other web service classes. 

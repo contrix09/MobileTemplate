@@ -1,9 +1,15 @@
 ﻿using Newtonsoft.Json;
+using SQLite;
 
 namespace MobileTemplate.DataContracts.User
 {
+    [Table("Tbl_User")]
     public class UserDataContract
     {
+        [PrimaryKey, AutoIncrement]
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("username")]
         public string UserName { get; set; }
 

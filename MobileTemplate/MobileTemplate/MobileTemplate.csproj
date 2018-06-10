@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Helpers\AsyncCommand.cs" />
     <Compile Remove="Helpers\AsynCommandExtensions.cs" />
@@ -21,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MobileTemplate.Entities\MobileTemplate.Entities.csproj" />
     <ProjectReference Include="..\..\MobileTemplate.Managers\MobileTemplate.Managers.csproj" />
+    <ProjectReference Include="..\..\MobileTemplate.Repositories\MobileTemplate.Repositories.csproj" />
   </ItemGroup>
 
   <ItemGroup>

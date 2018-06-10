@@ -3,6 +3,8 @@ using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using MobileTemplate.Common;
 using MobileTemplate.Managers.User;
+using MobileTemplate.Repositories.Database;
+using MobileTemplate.Repositories.User;
 using MobileTemplate.Utilities;
 using MobileTemplate.ViewModels;
 using MobileTemplate.Views;
@@ -32,6 +34,7 @@ namespace MobileTemplate.Core
             this.RegisterViewModels(builder);
             this.RegisterWebServices(builder);
             this.RegisterManagers(builder);
+            this.RegisterRepositories(builder);
             this.RegisterUtilities(builder);
         }
 
@@ -53,6 +56,12 @@ namespace MobileTemplate.Core
         private void RegisterManagers(ContainerBuilder builder)
         {
             builder.RegisterType<UserManager>().As<IUserManager>().SingleInstance();
+        }
+
+        private void RegisterRepositories(ContainerBuilder builder)
+        {
+            builder.RegisterType<AppDatabase>().As<IAppDatabase>().SingleInstance();
+            builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
         }
 
         private void RegisterUtilities(ContainerBuilder builder)

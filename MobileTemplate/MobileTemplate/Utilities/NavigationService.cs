@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace MobileTemplate.Utilities
 {
-    public class NavigationService : INavigationService
+    public sealed class NavigationService : INavigationService
     {
         #region Fields
 
@@ -31,7 +31,7 @@ namespace MobileTemplate.Utilities
         #region Methods
 
         /// <summary>
-        /// Sets the Root Page of a new Navigation Stack
+        /// Sets the Root Page of a new Navigation Stack.
         /// </summary>
         /// <param name="rootPageKey">The key to identify the root page. See also <see cref="ViewNames"/>.</param>
         /// <param name="parameter">The parameter to be passed to the view model of the root page.</param>
@@ -54,7 +54,7 @@ namespace MobileTemplate.Utilities
         }
 
         /// <summary>
-        /// Navigate back to the most recent Page
+        /// Navigate back to the most recent Page.
         /// </summary>
         public async Task GoBack()
         {
@@ -76,21 +76,21 @@ namespace MobileTemplate.Utilities
         }
 
         /// <summary>
-        /// Navigate to a Page displayed modally
+        /// Navigate to a Page displayed modally.
         /// </summary>
-        /// <param name="pageKey">The key to identify the Page to navigate to</param>
-        /// <param name="animated">Sets whether the navigation will be animated</param>
+        /// <param name="pageKey">The key to identify the Page to navigate to.</param>
+        /// <param name="animated">Sets whether the navigation will be animated.</param>
         public async Task NavigateModalAsync(string pageKey, bool animated = true)
         {
             await NavigateModalAsync(pageKey, null, animated);
         }
 
         /// <summary>
-        /// Navigate to a Page displayed modally
+        /// Navigate to a Page displayed modally.
         /// </summary>
-        /// <param name="pageKey">The key to identify the Page to navigate to</param>
-        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be navigated to</param>
-        /// <param name="animated">Sets whether the navigation will be animated</param>
+        /// <param name="pageKey">The key to identify the Page to navigate to.</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be navigated to.</param>
+        /// <param name="animated">Sets whether the navigation will be animated.</param>
         public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
@@ -108,8 +108,8 @@ namespace MobileTemplate.Utilities
         /// <summary>
         /// Navigate to a Page
         /// </summary>
-        /// <param name="pageKey">The key to identify the Page to navigate to</param>
-        /// <param name="animated">Sets whether the navigation will be animated</param>
+        /// <param name="pageKey">The key to identify the Page to navigate to.</param>
+        /// <param name="animated">Sets whether the navigation will be animated.</param>
         public async Task NavigateAsync(string pageKey, bool animated = true)
         {
             await NavigateAsync(pageKey, null, animated);
@@ -118,9 +118,9 @@ namespace MobileTemplate.Utilities
         /// <summary>
         /// Navigate to a Page
         /// </summary>
-        /// <param name="pageKey">The key to identify the Page to navigate to</param>
-        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be navigated to</param>
-        /// <param name="animated">Sets whether the navigation will be animated</param>
+        /// <param name="pageKey">The key to identify the Page to navigate to.</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be navigated to.</param>
+        /// <param name="animated">Sets whether the navigation will be animated.</param>
         public async Task NavigateAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
@@ -131,10 +131,10 @@ namespace MobileTemplate.Utilities
         }
 
         /// <summary>
-        /// Initializes and retrieves a Page
+        /// Initializes and retrieves a Page.
         /// </summary>
-        /// <param name="pageKey">The key to identify the page to be retrieved</param>
-        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be retrieved</param>
+        /// <param name="pageKey">The key to identify the page to be retrieved.</param>
+        /// <param name="parameter">The parameter to be passed to the view model of the Page that will be retrieved.</param>
         private Page GetPage(string pageKey, object parameter = null)
         {
             var page = ServiceLocator.Current.GetInstance<Page>(pageKey);

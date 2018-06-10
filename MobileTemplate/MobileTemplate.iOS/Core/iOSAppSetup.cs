@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using MobileTemplate.Core;
+using MobileTemplate.iOS.Database;
+using MobileTemplate.Repositories.Database;
 
 namespace MobileTemplate.iOS.Core
 {
@@ -8,6 +10,8 @@ namespace MobileTemplate.iOS.Core
         protected override void RegisterDependencies(ContainerBuilder builder)
         {
             base.RegisterDependencies(builder);
+
+            builder.RegisterType<iOSDatabaseConnection>().As<IPlatformDatabaseConnection>().SingleInstance();
 
             //Register platform-specific services
         }

@@ -108,6 +108,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Core\iOSAppSetup.cs" />
+    <Compile Include="Database\iOSDatabaseConnection.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -169,10 +170,17 @@
     <PackageReference Include="Autofac">
       <Version>4.8.1</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.4.118</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\MobileTemplate.Repositories\MobileTemplate.Repositories.csproj">
+      <Project>{1000E82B-CFBB-4E38-B197-425F3CCAF306}</Project>
+      <Name>MobileTemplate.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MobileTemplate\MobileTemplate.csproj">
       <Project>{1E807C86-97E1-4EAE-A57A-4563F3F2D643}</Project>
       <Name>MobileTemplate</Name>
