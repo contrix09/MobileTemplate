@@ -29,6 +29,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\LabelStyles.xaml.cs">
+      <DependentUpon>LabelStyles.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Strings.xaml.cs">
+      <DependentUpon>Strings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Sizes.xaml.cs">
+      <DependentUpon>Sizes.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PageStyles.xaml.cs">
+      <DependentUpon>PageStyles.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

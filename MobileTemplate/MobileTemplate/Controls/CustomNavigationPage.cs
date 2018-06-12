@@ -18,9 +18,9 @@ namespace MobileTemplate.Controls
         /// </summary>
         public void CleanUp()
         {
-            if (this.RootPage is ICleanUp currentNavigationRootPage)
+            if (this.RootPage is ICleanUp view)
             {
-                currentNavigationRootPage.CleanUp();
+                view.CleanUp();
             }
 
             this.Popped -= this.CustomNavigationPage_Popped;

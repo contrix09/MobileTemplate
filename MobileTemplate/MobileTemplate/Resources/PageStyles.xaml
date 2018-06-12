@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary x:Class="MobileTemplate.Resources.PageStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MobileTemplate.Resources">
+    <ResourceDictionary.MergedDictionaries>
+        <local:Colors />
+        <local:Sizes />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--#region  BASE STYLES-->
+
+    <Style x:Key="PageStyle.Base" TargetType="Page">
+        <Setter Property="Padding" Value="{StaticResource ContentPage.Padding}" />
+
+        <!--  ADD MORE BASE STYLES  -->
+
+    </Style>
+
+    <!--#endregion-->
+
+    <Style x:Key="MainPageStyle"
+        BasedOn="{StaticResource PageStyle.Base}"
+        TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+
+        <!--  ADD MORE SPECIFIC STYLES  -->
+
+    </Style>
+
+</ResourceDictionary>

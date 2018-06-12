@@ -7,26 +7,13 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <local:Colors />
-                
-                <!-- ADD MORE RESOURCE DICTIONARIES -->
-                
+                <local:PageStyles />
+                <local:LabelStyles />
+                <local:Strings />
+
+                <!--  ADD MORE RESOURCE DICTIONARIES  -->
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
-        <Style x:Key="PageStyle.Base" TargetType="Page">
-            <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
-
-            <!--  ADD MORE BASE STYLES  -->
-
-        </Style>
-
-        <Style x:Key="MainPageStyle"
-            BasedOn="{StaticResource PageStyle.Base}"
-            TargetType="ContentPage">
-
-            <!--  ADD MORE SPECIFIC STYLES  -->
-
-        </Style>
-
     </Application.Resources>
 </Application>

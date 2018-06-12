@@ -16,8 +16,8 @@ namespace MobileTemplate.Helpers.Commands
         /// <param name="task">The task to watch.</param>
         private NotifyTask(Task task)
         {
-            Task = task;
-            TaskCompleted = MonitorTaskAsync(task);
+            this.Task = task;
+            this.TaskCompleted = MonitorTaskAsync(task);
         }
 
         private async Task MonitorTaskAsync(Task task)
@@ -76,47 +76,47 @@ namespace MobileTemplate.Helpers.Commands
         /// <summary>
         /// Gets the current task status. This property raises a notification when the task completes.
         /// </summary>
-        public TaskStatus Status { get { return Task.Status; } }
+        public TaskStatus Status { get { return this.Task.Status; } }
 
         /// <summary>
         /// Gets whether the task has completed. This property raises a notification when the value changes to <c>true</c>.
         /// </summary>
-        public bool IsCompleted { get { return Task.IsCompleted; } }
+        public bool IsCompleted { get { return this.Task.IsCompleted; } }
 
         /// <summary>
         /// Gets whether the task is busy (not completed). This property raises a notification when the value changes to <c>false</c>.
         /// </summary>
-        public bool IsNotCompleted { get { return !Task.IsCompleted; } }
+        public bool IsNotCompleted { get { return !this.Task.IsCompleted; } }
 
         /// <summary>
         /// Gets whether the task has completed successfully. This property raises a notification when the value changes to <c>true</c>.
         /// </summary>
-        public bool IsSuccessfullyCompleted { get { return Task.Status == TaskStatus.RanToCompletion; } }
+        public bool IsSuccessfullyCompleted { get { return this.Task.Status == TaskStatus.RanToCompletion; } }
 
         /// <summary>
         /// Gets whether the task has been canceled. This property raises a notification only if the task is canceled (i.e., if the value changes to <c>true</c>).
         /// </summary>
-        public bool IsCanceled { get { return Task.IsCanceled; } }
+        public bool IsCanceled { get { return this.Task.IsCanceled; } }
 
         /// <summary>
         /// Gets whether the task has faulted. This property raises a notification only if the task faults (i.e., if the value changes to <c>true</c>).
         /// </summary>
-        public bool IsFaulted { get { return Task.IsFaulted; } }
+        public bool IsFaulted { get { return this.Task.IsFaulted; } }
 
         /// <summary>
         /// Gets the wrapped faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public AggregateException Exception { get { return Task.Exception; } }
+        public AggregateException Exception { get { return this.Task.Exception; } }
 
         /// <summary>
         /// Gets the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public Exception InnerException { get { return (Exception == null) ? null : Exception.InnerException; } }
+        public Exception InnerException { get { return (this.Exception == null) ? null : this.Exception.InnerException; } }
 
         /// <summary>
         /// Gets the error message for the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public string ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
+        public string ErrorMessage { get { return (this.InnerException == null) ? null : this.InnerException.Message; } }
 
         /// <summary>
         /// Event that notifies listeners of property value changes.
@@ -181,9 +181,9 @@ namespace MobileTemplate.Helpers.Commands
         /// <param name="defaultResult">The value to return from <see cref="Result"/> while the task is not yet complete.</param>
         internal NotifyTask(Task<TResult> task, TResult defaultResult)
         {
-            _defaultResult = defaultResult;
-            Task = task;
-            TaskCompleted = MonitorTaskAsync(task);
+            this._defaultResult = defaultResult;
+            this.Task = task;
+            this.TaskCompleted = MonitorTaskAsync(task);
         }
 
         private async Task MonitorTaskAsync(Task task)
@@ -243,52 +243,52 @@ namespace MobileTemplate.Helpers.Commands
         /// <summary>
         /// Gets the result of the task. Returns the "default result" value specified in the constructor if the task has not yet completed successfully. This property raises a notification when the task completes successfully.
         /// </summary>
-        public TResult Result { get { return (Task.Status == TaskStatus.RanToCompletion) ? Task.Result : _defaultResult; } }
+        public TResult Result { get { return (this.Task.Status == TaskStatus.RanToCompletion) ? this.Task.Result : this._defaultResult; } }
 
         /// <summary>
         /// Gets the current task status. This property raises a notification when the task completes.
         /// </summary>
-        public TaskStatus Status { get { return Task.Status; } }
+        public TaskStatus Status { get { return this.Task.Status; } }
 
         /// <summary>
         /// Gets whether the task has completed. This property raises a notification when the value changes to <c>true</c>.
         /// </summary>
-        public bool IsCompleted { get { return Task.IsCompleted; } }
+        public bool IsCompleted { get { return this.Task.IsCompleted; } }
 
         /// <summary>
         /// Gets whether the task is busy (not completed). This property raises a notification when the value changes to <c>false</c>.
         /// </summary>
-        public bool IsNotCompleted { get { return !Task.IsCompleted; } }
+        public bool IsNotCompleted { get { return !this.Task.IsCompleted; } }
 
         /// <summary>
         /// Gets whether the task has completed successfully. This property raises a notification when the value changes to <c>true</c>.
         /// </summary>
-        public bool IsSuccessfullyCompleted { get { return Task.Status == TaskStatus.RanToCompletion; } }
+        public bool IsSuccessfullyCompleted { get { return this.Task.Status == TaskStatus.RanToCompletion; } }
 
         /// <summary>
         /// Gets whether the task has been canceled. This property raises a notification only if the task is canceled (i.e., if the value changes to <c>true</c>).
         /// </summary>
-        public bool IsCanceled { get { return Task.IsCanceled; } }
+        public bool IsCanceled { get { return this.Task.IsCanceled; } }
 
         /// <summary>
         /// Gets whether the task has faulted. This property raises a notification only if the task faults (i.e., if the value changes to <c>true</c>).
         /// </summary>
-        public bool IsFaulted { get { return Task.IsFaulted; } }
+        public bool IsFaulted { get { return this.Task.IsFaulted; } }
 
         /// <summary>
         /// Gets the wrapped faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public AggregateException Exception { get { return Task.Exception; } }
+        public AggregateException Exception { get { return this.Task.Exception; } }
 
         /// <summary>
         /// Gets the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public Exception InnerException { get { return (Exception == null) ? null : Exception.InnerException; } }
+        public Exception InnerException { get { return (this.Exception == null) ? null : this.Exception.InnerException; } }
 
         /// <summary>
         /// Gets the error message for the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public string ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
+        public string ErrorMessage { get { return (this.InnerException == null) ? null : this.InnerException.Message; } }
 
         /// <summary>
         /// Event that notifies listeners of property value changes.

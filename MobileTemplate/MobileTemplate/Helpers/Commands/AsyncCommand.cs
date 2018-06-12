@@ -23,7 +23,7 @@ namespace MobileTemplate.Helpers.Commands
         public AsyncCommand(Func<object, Task> executeAsync, Func<object, ICanExecuteChanged> canExecuteChangedFactory)
             : base(canExecuteChangedFactory)
         {
-            _executeAsync = executeAsync;
+            this._executeAsync = executeAsync;
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace MobileTemplate.Helpers.Commands
         {
             get
             {
-                if (Execution == null)
+                if (this.Execution == null)
                     return false;
-                return Execution.IsNotCompleted;
+                return this.Execution.IsNotCompleted;
             }
         }
 
@@ -79,16 +79,16 @@ namespace MobileTemplate.Helpers.Commands
         public override async Task ExecuteAsync(object parameter)
         {
             var tcs = new TaskCompletionSource<object>();
-            Execution = NotifyTask.Create(DoExecuteAsync(tcs.Task, _executeAsync, parameter));
+            this.Execution = NotifyTask.Create(DoExecuteAsync(tcs.Task, this._executeAsync, parameter));
             OnCanExecuteChanged();
             var propertyChanged = PropertyChanged;
             propertyChanged?.Invoke(this, PropertyChangedEventArgsCache.Instance.Get("Execution"));
             propertyChanged?.Invoke(this, PropertyChangedEventArgsCache.Instance.Get("IsExecuting"));
             tcs.SetResult(null);
-            await Execution.TaskCompleted;
+            await this.Execution.TaskCompleted;
             OnCanExecuteChanged();
             PropertyChanged?.Invoke(this, PropertyChangedEventArgsCache.Instance.Get("IsExecuting"));
-            await Execution.Task;
+            await this.Execution.Task;
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace MobileTemplate.Helpers.Commands
         /// The implementation of <see cref="ICommand.CanExecute(object)"/>. Returns <c>false</c> whenever the async command is in progress.
         /// </summary>
         /// <param name="parameter">The parameter for the command.</param>
-        protected override bool CanExecute(object parameter) => !IsExecuting;
+        protected override bool CanExecute(object parameter) => !this.IsExecuting;
 
         private static async Task DoExecuteAsync(Task precondition, Func<object, Task> executeAsync, object parameter)
         {

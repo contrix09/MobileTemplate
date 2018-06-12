@@ -22,7 +22,7 @@ namespace MobileTemplate.Helpers.Commands
         /// </summary>
         protected AsyncCommandBase(Func<object, ICanExecuteChanged> canExecuteChangedFactory)
         {
-            _canExecuteChanged = canExecuteChangedFactory(this);
+            this._canExecuteChanged = canExecuteChangedFactory(this);
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace MobileTemplate.Helpers.Commands
         /// </summary>
         protected void OnCanExecuteChanged()
         {
-            _canExecuteChanged.OnCanExecuteChanged();
+            this._canExecuteChanged.OnCanExecuteChanged();
         }
 
         event EventHandler ICommand.CanExecuteChanged
         {
-            add { _canExecuteChanged.CanExecuteChanged += value; }
-            remove { _canExecuteChanged.CanExecuteChanged -= value; }
+            add { this._canExecuteChanged.CanExecuteChanged += value; }
+            remove { this._canExecuteChanged.CanExecuteChanged -= value; }
         }
 
         bool ICommand.CanExecute(object parameter)

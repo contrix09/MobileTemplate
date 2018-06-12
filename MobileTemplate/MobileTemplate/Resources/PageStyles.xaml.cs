@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace MobileTemplate.Resources
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Colors : ResourceDictionary
+	public partial class PageStyles : ResourceDictionary
 	{
-		public Colors()
+		public PageStyles ()
 		{
 			InitializeComponent ();
 		}

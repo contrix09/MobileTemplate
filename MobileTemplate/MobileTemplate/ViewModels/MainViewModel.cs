@@ -49,7 +49,7 @@ namespace MobileTemplate.ViewModels
 
         private async Task LoginAsync(object arg)
         {
-            await this.Navigation.NavigateAsync(ViewNames.MAIN_VIEW);
+            await this.Navigation.NavigateAsync(ViewNames.MAIN_VIEW, arg);
         }
 
         #endregion

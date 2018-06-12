@@ -42,7 +42,7 @@ namespace MobileTemplate.Utilities
 
             if (_navigationPageStack.Count > 0)
             {
-                CurrentNavigationPage?.CleanUp();
+                this.CurrentNavigationPage.CleanUp();
             }
 
             _navigationPageStack.Clear();
@@ -94,13 +94,8 @@ namespace MobileTemplate.Utilities
         public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
-            var modalNavigationPage = new CustomNavigationPage(page);
 
-            NavigationPage.SetHasNavigationBar(page, false);
-
-            _navigationPageStack.Push(modalNavigationPage);
-
-            await this.CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
+            await this.CurrentNavigationPage.Navigation.PushModalAsync(page, animated);
 
             this.CurrentPageKey = pageKey;
         }

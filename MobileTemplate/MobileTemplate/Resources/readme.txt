@@ -1,1 +1,0 @@
-﻿You can also add here other constant styles like layout size, font size, fonts, etc.
