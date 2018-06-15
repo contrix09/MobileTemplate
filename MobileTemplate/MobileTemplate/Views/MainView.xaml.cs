@@ -1,5 +1,4 @@
 ﻿using MobileTemplate.ViewModels;
-using Xamarin.Forms;
 
 namespace MobileTemplate.Views
 {

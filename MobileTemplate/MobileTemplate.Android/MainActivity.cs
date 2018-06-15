@@ -1,5 +1,4 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MobileTemplate.Droid.Core;
@@ -19,14 +18,15 @@ namespace MobileTemplate.Droid
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            this._app = new App(new AndroidAppSetup());
+            var appSetup = new AndroidAppSetup();
+            this._app = new App();
             LoadApplication(this._app);
         }
 
-        protected override void OnDestroy()
+        protected override void OnStop()
         {
             this._app.OnStop();
-            base.OnDestroy();
+            base.OnStop();
         }
     }
 }

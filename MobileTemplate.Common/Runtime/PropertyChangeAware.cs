@@ -5,8 +5,7 @@ using System.Runtime.CompilerServices;
 namespace MobileTemplate.Common.Runtime
 {
     /// <summary>
-    /// An abstract class that implements the <see cref="INotifyPropertyChanged"/> interface. It provides the method <see cref="PropertyChangeAware.Set{T}(ref T, T, string)"/> 
-    /// which will raise the <see cref="INotifyPropertyChanged.PropertyChanged"/> event when there is any change of an inheriting class' properties.
+    /// An abstract class that implements the <see cref="INotifyPropertyChanged"/> interface.
     ///</summary>
     public abstract class PropertyChangeAware : INotifyPropertyChanged
     {
@@ -16,7 +15,7 @@ namespace MobileTemplate.Common.Runtime
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Method to change a property's value. This will also call the <see cref="OnPropertyChanged(string)" /> method.
+        /// Method to change a property's value.
         /// </summary>
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="field">The field containing the current property's value.</param>

@@ -1,8 +1,7 @@
 ﻿using MobileTemplate.Helpers;
-using System.Linq;
 using Xamarin.Forms;
 
-namespace MobileTemplate.Controls
+namespace MobileTemplate.Utilities.Navigation
 {
     public class CustomNavigationPage : NavigationPage, ICleanUp
     {
@@ -18,8 +17,9 @@ namespace MobileTemplate.Controls
         /// </summary>
         public void CleanUp()
         {
-            if (this.RootPage is ICleanUp view)
+            foreach (ICleanUp view in this.Navigation.NavigationStack)
             {
+                System.Diagnostics.Debug.WriteLine("Cleaning up: " + view);
                 view.CleanUp();
             }
 
@@ -30,6 +30,7 @@ namespace MobileTemplate.Controls
         {
             if (e.Page is ICleanUp view)
             {
+                System.Diagnostics.Debug.WriteLine("Cleaning up: " + view);
                 view.CleanUp();
             }
         }

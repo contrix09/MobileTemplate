@@ -6,7 +6,18 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\**" />
+    <EmbeddedResource Remove="Core\**" />
+    <None Remove="Core\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Helpers\AsyncCommand.cs" />
@@ -16,10 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="5.0.0" />
     <PackageReference Include="Nito.Mvvm.Core" Version="1.2.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,17 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\LabelStyles.xaml.cs">
-      <DependentUpon>LabelStyles.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Resources\Strings.xaml.cs">
       <DependentUpon>Strings.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Sizes.xaml.cs">
-      <DependentUpon>Sizes.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\PageStyles.xaml.cs">
-      <DependentUpon>PageStyles.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -48,6 +49,12 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Colors.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Fonts.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Styles.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

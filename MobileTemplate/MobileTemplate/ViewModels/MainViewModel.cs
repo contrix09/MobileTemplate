@@ -3,6 +3,7 @@ using MobileTemplate.Helpers.Commands;
 using MobileTemplate.Managers.User;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MobileTemplate.ViewModels
 {
@@ -49,7 +50,7 @@ namespace MobileTemplate.ViewModels
 
         private async Task LoginAsync(object arg)
         {
-            await this.Navigation.NavigateAsync(ViewNames.MAIN_VIEW, arg);
+            await this.Navigation.NavigateAsync(ViewNames.MainView, arg);
         }
 
         #endregion
