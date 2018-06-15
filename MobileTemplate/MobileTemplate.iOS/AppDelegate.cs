@@ -13,7 +13,8 @@ namespace MobileTemplate.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
-            this._app = new App(new iOSAppSetup());
+            var appSetup = new iOSAppSetup();
+            this._app = new App();
             LoadApplication(this._app);
 
             return base.FinishedLaunching(uiApplication, launchOptions);

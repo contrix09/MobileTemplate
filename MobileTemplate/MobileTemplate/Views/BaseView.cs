@@ -1,6 +1,5 @@
 ﻿using CommonServiceLocator;
 using MobileTemplate.Helpers;
-using MobileTemplate.Utilities;
 using MobileTemplate.ViewModels;
 using Xamarin.Forms;
 
@@ -18,7 +17,7 @@ namespace MobileTemplate.Views
         /// <summary>
         /// Gets the object that is currently bound as this view's <see cref="BindableObject.BindingContext"/>.
         /// </summary>
-        public TViewModel ViewModel { get; private set; }
+        protected TViewModel ViewModel { get; private set; }
 
 
         /// <summary>
@@ -27,15 +26,16 @@ namespace MobileTemplate.Views
         public virtual void CleanUp()
         {
             this.ViewModel.CleanUp();
-            this.BindingContext = this.ViewModel = null;
+            this.BindingContext = null;
+            this.ViewModel = null;
             this.Content = null;
         }
 
         protected override void OnAppearing()
         {
-            if(!this._viewModelInitialized)
+            if (!this._viewModelInitialized)
             {
-                if(this.BindingContext == null)
+                if (this.BindingContext == null)
                 {
                     this.BindingContext = this.ViewModel;
                 }

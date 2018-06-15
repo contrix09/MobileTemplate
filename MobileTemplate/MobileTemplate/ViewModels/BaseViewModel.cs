@@ -1,7 +1,7 @@
 ﻿using CommonServiceLocator;
 using MobileTemplate.Common.Runtime;
 using MobileTemplate.Helpers;
-using MobileTemplate.Utilities;
+using MobileTemplate.Utilities.Navigation;
 
 namespace MobileTemplate.ViewModels
 {

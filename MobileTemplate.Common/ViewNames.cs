@@ -5,6 +5,6 @@
     /// </summary>
     public static class ViewNames
     {
-        public const string MAIN_VIEW = "MainView";
+        public const string MainView = "MainView";
     }
 }

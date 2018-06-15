@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace MobileTemplate.Utilities
+namespace MobileTemplate.Utilities.Navigation
 {
     public interface INavigationService
     {

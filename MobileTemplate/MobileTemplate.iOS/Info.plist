@@ -36,5 +36,11 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+  <key>UIAppFonts</key>
+  <array>
+    <string>Fonts/Roboto-Bold.ttf</string>
+    <string>Fonts/Roboto-Regular.ttf</string>
+    <string>Fonts/Roboto-Medium.ttf</string>
+  </array>
 </dict>
 </plist>

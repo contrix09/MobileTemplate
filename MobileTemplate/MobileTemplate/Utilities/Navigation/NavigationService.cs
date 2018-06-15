@@ -1,12 +1,11 @@
 ﻿using CommonServiceLocator;
-using MobileTemplate.Controls;
 using MobileTemplate.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MobileTemplate.Utilities
+namespace MobileTemplate.Utilities.Navigation
 {
     public sealed class NavigationService : INavigationService
     {

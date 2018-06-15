@@ -3,9 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!--  If multiple languages will be used, consider using .RESX files  -->
-
-    <OnPlatform x:Key="AppTitle"
+    <OnPlatform x:Key="String.AppTitle"
         x:TypeArguments="x:String"
         Default="Application Title" />
 
