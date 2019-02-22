@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="5.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobileTemplate.Common\MobileTemplate.Common.csproj" />
+    <ProjectReference Include="..\MobileTemplate.Managers\MobileTemplate.Managers.csproj" />
+    <ProjectReference Include="..\MobileTemplate.Repositories\MobileTemplate.Repositories.csproj" />
+    <ProjectReference Include="..\MobileTemplate.WebServices\MobileTemplate.WebServices.csproj" />
+    <ProjectReference Include="..\MobileTemplate\MobileTemplate\MobileTemplate.csproj" />
+  </ItemGroup>
+
+</Project>
